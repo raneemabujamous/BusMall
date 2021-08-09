@@ -50,6 +50,13 @@ function render() {
   randomNunmtow = randomNumber(0, arrayImgName.length - 1);
    randomNunmthree = randomNumber(0, arrayImgName.length - 1);
 
+   do { 
+    randomNunmOne = randomNumber(0, arrayImgName.length - 1);
+
+    randomNunmtow = randomNumber( 0, arrayImgName.length - 1 );
+    randomNunmthree = randomNumber(0, arrayImgName.length - 1);
+ 
+  } while( (randomNunmOne === randomNunmtow)|| ( randomNunmOne=== randomNunmthree)||(randomNunmtow===randomNunmthree) )
 
     oneImage.src = './img/' + BusMall.arrayOfObject[randomNunmOne].imgSrc
     towImage.src = './img/' + BusMall.arrayOfObject[randomNunmtow].imgSrc
