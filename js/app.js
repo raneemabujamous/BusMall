@@ -21,8 +21,7 @@ let randomNunmOne
 let randomNunmtow 
 let randomNunmthree 
 let numberOFcounter = 25
-
-
+let arrryOFRandom= []
 class BusMall {
     constructor(name, imgSrc) {
         this.name = name;
@@ -46,9 +45,7 @@ function randomNumber(min, max) {
 
 }
 function render() {
-  randomNunmOne = randomNumber(0, arrayImgName.length - 1);
-  randomNunmtow = randomNumber(0, arrayImgName.length - 1);
-   randomNunmthree = randomNumber(0, arrayImgName.length - 1);
+  
 
    do { 
     randomNunmOne = randomNumber(0, arrayImgName.length - 1);
@@ -56,7 +53,11 @@ function render() {
     randomNunmtow = randomNumber( 0, arrayImgName.length - 1 );
     randomNunmthree = randomNumber(0, arrayImgName.length - 1);
  
-  } while( (randomNunmOne === randomNunmtow)|| ( randomNunmOne=== randomNunmthree)||(randomNunmtow===randomNunmthree) )
+  } while( (randomNunmOne === randomNunmtow)|| ( randomNunmOne=== randomNunmthree)||(randomNunmtow===randomNunmthree) || (arrryOFRandom.includes(randomNunmOne) ) || (arrryOFRandom.includes(randomNunmtow) ) || (arrryOFRandom.includes(randomNunmthree) )  )  
+
+
+  arrryOFRandom=[randomNunmOne,randomNunmtow,randomNunmthree]
+
 
     oneImage.src = './img/' + BusMall.arrayOfObject[randomNunmOne].imgSrc
     towImage.src = './img/' + BusMall.arrayOfObject[randomNunmtow].imgSrc
@@ -119,11 +120,83 @@ createLi.textContent = BusMall.arrayOfObject[i].name +' had ' + BusMall.arrayOfO
 getUl.appendChild(createLi);
 
     }
+
+    chart()
+
 }
+ 
+function chart(){
+let nameChart = [];
+let showChart = [];
+let clickedChart = [];
+
+for (let x=1 ; x<BusMall.arrayOfObject.length ; x++){
+
+    nameChart.push(BusMall.arrayOfObject[x].name)
+    showChart.push(BusMall.arrayOfObject[x].shown)
+    clickedChart.push(BusMall.arrayOfObject[x].clicked)
 
 
+}
+var ctx = document.getElementById('myChart').getContext('2d');
+
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: nameChart,
+        datasets: [{
+            label: '# of Votes',
+            data: showChart,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        },{
+            label: nameChart,
+            data: clickedChart,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
 
 
+}
 
 
 
