@@ -22,28 +22,28 @@ let randomNunmtow
 let randomNunmthree 
 let numberOFcounter = 25
 let arrryOFRandom= []
-class BusMall {
-    constructor(name, imgSrc) {
+
+    function BusMall(name, imgSrc , shown=0 ,clicked=0 ) {
         this.name = name;
         this.imgSrc = imgSrc;
-        this.shown = 0;
-        this.clicked = 0;
+        this.shown = shown;
+        this.clicked = clicked;
         BusMall.arrayOfObject.push(this);
     }
-}
+
 
 
 
 BusMall.arrayOfObject = [];
 
-for (let i = 0; i < arrayImgName.length; i++) {
-    new BusMall(arrayImgName[i].split('.')[0], arrayImgName[i])
-}
+getData()
 
 function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 
 }
+
+
 function render() {
   
 
@@ -67,7 +67,8 @@ function render() {
     BusMall.arrayOfObject[randomNunmtow].shown++
     BusMall.arrayOfObject[randomNunmthree].shown++
      counter ++
-    
+    localStorage.data = JSON.stringify(BusMall.arrayOfObject);
+    console.log(BusMall.arrayOfObject)
 }
 
 render();
@@ -199,4 +200,18 @@ var myChart = new Chart(ctx, {
 }
 
 
+
+function getData(){
+    if(localStorage.data){
+        let data = JSON.parse(localStorage.data)
+
+        for(let i=0 ; i<data.length ; i++ ){
+            new BusMall(data[i].name,data[i].imgSrc,data[i].shown ,data[i].clicked)
+        }
+    }else{
+        for (let i = 0; i < arrayImgName.length; i++) {
+            new BusMall(arrayImgName[i].split('.')[0], arrayImgName[i])
+        }
+    }
+}
 
